@@ -9,7 +9,7 @@ service nginx start
 
 Генерируем ключ:
 ```
-openssl dhparam -out /etc/letsencrypt/live/my_host/dhparam.pem 4096
+openssl dhparam -out /etc/letsencrypt/live/my_host/dh4096.pem 4096
 ```
 
 
@@ -68,23 +68,23 @@ server {
 server {
 	listen       443 ssl;
 	server_name  my_host;
-	root         /var/html/;
+	root         /var/www/html;
 
 	ssl_certificate     /etc/letsencrypt/live/my_host/cert.pem;
 	ssl_certificate_key /etc/letsencrypt/live/my_host/privkey.pem;
 	ssl_dhparam /etc/letsencrypt/live/my_host/dh4096.pem;
 	
-  # Сайт доступен только по https
-  #add_header Strict-Transport-Security 'max-age=604800';
-  
-  # Запретить показывать сайт во фрейме11
-  add_header X-Frame-Options DENY;
-  
-  # Использовать отданный сервером Сontent-type, вместо автоматического его определения
-  add_header X-Content-Type-Options nosniff;
-  
-  # Активировать XSS-защиту:
-  add_header X-XSS-Protection "1; mode=block";	
+	# Сайт доступен только по https
+	#add_header Strict-Transport-Security 'max-age=604800';
+
+	# Запретить показывать сайт во фрейме11
+	add_header X-Frame-Options DENY;
+
+	# Использовать отданный сервером Сontent-type, вместо автоматического его определения
+	add_header X-Content-Type-Options nosniff;
+
+	# Активировать XSS-защиту:
+	add_header X-XSS-Protection "1; mode=block";	
 	
 	location / {
 		proxy_pass                          http://10.0.0.1/; # http proxy to 10.0.0.1:80
@@ -105,6 +105,24 @@ server {
 	
 ```
 
+# Создаем обычные сертификаты для домена по умолчанию
+
+```
+mkdir -p /etc/nginx/ssl
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+```
+
+Настраиваем nginx:
+```
+server {
+	listen       443 ssl default_server;
+	root         /var/www/html;
+	
+	ssl_certificate     /etc/nginx/ssl/nginx.crt;
+	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+	
+}
+```
 
 # Обновление сертификата LetsEncrypt
 
@@ -118,6 +136,6 @@ service nginx start
 
 # Материалы
 
-1. https://habrahabr.ru/post/252821/
-2. https://spdycheck.org/ - SPDY Check
-3. https://www.ssllabs.com/ssltest/index.html - проверка качества защиты вашего сервера.
+1. [Nginx и https. Получаем класс А+](https://habrahabr.ru/post/252821/)
+1. [Проверка качества защиты вашего сервера](https://www.ssllabs.com/ssltest/index.html)
+1. [Создание самоподписанного сертификата](https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04)
