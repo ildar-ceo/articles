@@ -132,16 +132,11 @@ service redmine start
 ```
 
 
-# Статьи по теме
-
-2. Процесс установки Mercurial в Centos 6
-
-
 # Материалы
 
-1. https://rvm.io/ - Ruby Version Manager (RVM)
-1. http://www.redmine.org/projects/redmine/wiki/RedmineInstall - Установка Redmine на английском
-1. http://www.redmine.org/projects/redmine/wiki/RusRedmineInstall - Установка Redmine на русском
+1. [Ruby Version Manager (RVM)](https://rvm.io/)
+1. [Установка Redmine на английском](http://www.redmine.org/projects/redmine/wiki/RedmineInstall)
+1. [Установка Redmine на русском](http://www.redmine.org/projects/redmine/wiki/RusRedmineInstall)
 1. http://www.hiddentao.com/archives/2008/12/06/redmine-svn-mysql-5-lighttpd-15/
 1. http://habrahabr.ru/post/225667/
 1. http://seriyps.ru/blog/2010/01/14/ustanovka-redmine-na-ubuntu-9-10-pod-nginx/
