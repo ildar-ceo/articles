@@ -1,17 +1,13 @@
-# Настройка сертификата Let's Encrypt 
-
-
 # Генерация сертификата со включенным nginx
 
-
-## Создаем обычные сертификаты для домена по умолчанию
+Создаем обычные сертификаты для домена по умолчанию
 
 ```
 mkdir -p /etc/nginx/ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
 ```
 
-## Настраиваем nginx:
+Настраиваем nginx:
 `nano /etc/nginx/sites-available/default`
 
 ```
@@ -28,8 +24,7 @@ server {
 }
 ```
 
-## Генерируем сертификат
-
+Генерируем сертификат
 ```
 letsencrypt certonly -a webroot --webroot-path=/var/www/html -d my_host --email my_email --text
 ```
@@ -47,7 +42,7 @@ openssl dhparam -out /etc/letsencrypt/live/my_host/dh4096.pem 4096
 ```
 
 
-# Nginx
+# Модификация файлов Nginx
 
 Вставляем строчки в раздел http nginx.conf
 ```
@@ -140,9 +135,7 @@ server {
 # Обновление сертификата LetsEncrypt
 
 ```
-service nginx stop
-letsencrypt renew
-service nginx start
+letsencrypt renew -a webroot --webroot-path=/var/www/html
 ```
 
 
