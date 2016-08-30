@@ -1,4 +1,4 @@
-# Mercurial и Https
+# Mercurial и Https для Centos 6
 
 
 Чтобы заработал Mercurial по https нужно:
