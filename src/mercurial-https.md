@@ -36,9 +36,9 @@ openssl.capath="/etc/ssl/certs/"
 username=<ваше имя пользователя>
 
 [auth]
-<myserver>.prefix = https://<myserver>/
-<myserver>.username = <логин>
-<myserver>.password = <пароль>
+<myserver_alias>.prefix = https://<myserver_domain_name>/
+<myserver_alias>.username = <логин>
+<myserver_alias>.password = <пароль>
 
 [defaults]
 push =  -v -f --debug
@@ -46,7 +46,7 @@ pull =  -v --debug
 commit =  -v --debug
 
 [hostfingerprints]
-<myserver> = 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+<myserver_domain_name> = 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
 
 
 #[web]
