@@ -152,6 +152,10 @@ server {
 letsencrypt renew -a webroot --webroot-path=/var/www/html
 ```
 
+В Cron добавить строчку
+```
+23            03      1       *       *       letsencrypt renew -a webroot --webroot-path=/var/www/html && service nginx reload
+```
 
 
 # Материалы
