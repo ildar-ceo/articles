@@ -1,28 +1,45 @@
-# Mercurial и Https для Centos 6
-
+# Mercurial и Https
 
 Чтобы заработал Mercurial по https нужно:
 
+##  для Centos 6
 
 Устанавливаем корневые сертификаты. Выполняем комманды под рутом
 ```bash
-sudo yum install ca-certificates
-sudo update-ca-trust force-enable
+yum install ca-certificates
+update-ca-trust force-enable
 ```
 
 
 Устанавливаем сертификаты от letsencrypt
 ```bash
-sudo wget https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x1-cross-signed.pem​"
-sudo wget https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x2-cross-signed.pem​"
-sudo wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x3-cross-signed.pem​"
-sudo wget https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x4-cross-signed.pem​"
+wget https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x1-cross-signed.pem"
+wget https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x2-cross-signed.pem"
+wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x3-cross-signed.pem"
+wget https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem -O"/etc/pki/ca-trust/source/anchors/lets-encrypt-x4-cross-signed.pem"
 ```
 
 Собираем сертификаты
 ```bash
 update-ca-trust extract
 ```
+
+##  Для Ubuntu
+
+Устанавливаем сертификаты от letsencrypt
+```bash
+wget https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem -O"/usr/local/share/ca-certificates/lets-encrypt-x1-cross-signed.crt"
+wget https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem -O"/usr/local/share/ca-certificates/lets-encrypt-x2-cross-signed.crt"
+wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O"/usr/local/share/ca-certificates/lets-encrypt-x3-cross-signed.crt"
+wget https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem -O"/usr/local/share/ca-certificates/lets-encrypt-x4-cross-signed.crt"
+```
+
+Собираем сертификаты
+```bash
+update-ca-certificates
+```
+
+##  Настройка php и hg
 
 Прописываем сертификаты в php. Выполняем комманду `sudo nano /etc/php.d/openssl.ini`
 ```
