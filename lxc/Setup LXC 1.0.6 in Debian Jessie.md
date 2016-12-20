@@ -70,7 +70,7 @@ chmod +x /etc/rc.local
 ```
 
 
-# Разрешаем проброс портов
+## Разрешаем проброс портов
 ```
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
@@ -86,9 +86,3 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 init 6
 ```
 
-
-# Материалы
-1. https://github.com/lxc/lxc
-2. https://wiki.ubuntu.com/LinuxContainers
-3. https://www.claudiokuenzler.com/blog/517/install-lxc-from-source-ubuntu-14.04-trusty
- 
