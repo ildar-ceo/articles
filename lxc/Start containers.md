@@ -51,7 +51,7 @@ TOTAL 1 of 1               0.34         0.10         0.10        6.59 MB    0.00
        valid_lft forever preferred_lft forever
 4: em0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
     link/ether 00:16:3e:c6:69:24 brd ff:ff:ff:ff:ff:ff
-	
+```
 	
 	
 ## Настройка тестового контейнера
