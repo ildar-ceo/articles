@@ -1,4 +1,4 @@
-# ×èñòèì iptables. Òîæå îïöèîíàëüíî
+# Ğ§Ğ¸ÑÑ‚Ğ¸Ğ¼ iptables. Ğ¢Ğ¾Ğ¶Ğµ Ğ¾Ğ¿Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ğ¾
 iptables -F
 iptables -t nat -F
 iptables -t mangle -F
@@ -7,30 +7,30 @@ iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
-# Ğàçğåøàåì DHCP è DNS äëÿ êîíòåéíåğîâ
+# Ğ Ğ°Ğ·Ñ€ĞµÑˆĞ°ĞµĞ¼ DHCP Ğ¸ DNS Ğ´Ğ»Ñ ĞºĞ¾Ğ½Ñ‚ĞµĞ¹Ğ½ĞµÑ€Ğ¾Ğ²
 iptables -A INPUT -i lxcbr0 -p tcp -m tcp --dport 53 -j ACCEPT
 iptables -A INPUT -i lxcbr0 -p udp -m udp --dport 53 -j ACCEPT
 iptables -A INPUT -i lxcbr0 -p tcp -m tcp --dport 67 -j ACCEPT
 iptables -A INPUT -i lxcbr0 -p udp -m udp --dport 67 -j ACCEPT
 
-# Îïöèîíàëüíî. Ğàçğåøèòü âõîäÿùèå ñîåäèíåíèÿ íà 80 ïîğò
+# ĞĞ¿Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ğ¾. Ğ Ğ°Ğ·Ñ€ĞµÑˆĞ¸Ñ‚ÑŒ Ğ²Ñ…Ğ¾Ğ´ÑÑ‰Ğ¸Ğµ ÑĞ¾ĞµĞ´Ğ¸Ğ½ĞµĞ½Ğ¸Ñ Ğ½Ğ° 80 Ğ¿Ğ¾Ñ€Ñ‚
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 
-# Ğàçğåøèòü SSH
+# Ğ Ğ°Ğ·Ñ€ĞµÑˆĞ¸Ñ‚ÑŒ SSH
 iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
 
-# Äîáàâëÿåì FORWARD äëÿ lxcbr0
+# Ğ”Ğ¾Ğ±Ğ°Ğ²Ğ»ÑĞµĞ¼ FORWARD Ğ´Ğ»Ñ lxcbr0
 iptables -A FORWARD -o lxcbr0 -j ACCEPT
 iptables -A FORWARD -i lxcbr0 -j ACCEPT
 iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
 iptables -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 
-# Íàñòğîéêà NAT äëÿ ñåòè 10.0.0.0/16
+# ĞĞ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ° NAT Ğ´Ğ»Ñ ÑĞµÑ‚Ğ¸ 10.0.0.0/16
 iptables -t nat -A POSTROUTING -s 10.0.0.0/16 ! -d 10.0.0.0/16 -j MASQUERADE
 
-# Îïöèîíàëüíî. Ğàçğåøèòü ïğîáğîñ ïîğòîâ
+# ĞĞ¿Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ğ¾. Ğ Ğ°Ğ·Ñ€ĞµÑˆĞ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ±Ñ€Ğ¾Ñ Ğ¿Ğ¾Ñ€Ñ‚Ğ¾Ğ²
 #iptables -t nat -A PREROUTING -p tcp --dport 22011 -j DNAT --to-destination 10.0.0.11:22
 
 
-# Ñîõğàíÿåì iptables
+# Ğ¡Ğ¾Ñ…Ñ€Ğ°Ğ½ÑĞµĞ¼ iptables
 iptables-save > /etc/default/iptables
