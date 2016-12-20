@@ -1,8 +1,8 @@
 # Процесс установки
 
-
+```
 yum install mysql-devel ImageMagick-devel ImageMagick-c++-devel
-
+```
 
 Ставим RVM:
 
