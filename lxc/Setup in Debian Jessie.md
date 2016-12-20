@@ -74,7 +74,7 @@ useradd lxc-root -g 1000000 -u 1000000 -M -r -d /dev/null
 
 Выполняем скрипт nat.sh:
 ```
-wget nat.sh -O "./nat.sh"
+wget https://raw.githubusercontent.com/vistoyn/articles/master/lxc/nat.sh -O "./nat.sh"
 /bin/bash ./nat.sh
 ```
 
