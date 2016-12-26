@@ -42,6 +42,11 @@ LXC_DOMAIN=""
 #LXC_DOMAIN="lxc"
 ```
 
+Добавляем права доступа к папке
+```
+chown 755 /var/lib/lxc
+```
+
 
 ## Настройка UID/GID
 
