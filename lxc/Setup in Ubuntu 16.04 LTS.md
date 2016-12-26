@@ -44,7 +44,7 @@ LXC_DOMAIN=""
 
 Добавляем права доступа к папке
 ```
-chown 755 /var/lib/lxc
+chmod 755 /var/lib/lxc
 ```
 
 
